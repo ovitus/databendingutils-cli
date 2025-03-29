@@ -1,10 +1,10 @@
 use std::env;
 use std::process;
 
-mod fromhbmp;
-mod tohbmp;
-mod fromsbr;
 mod tosbr;
+mod fromsbr;
+mod tohbmp;
+mod fromhbmp;
 
 fn print_usage() {
     eprintln!("Usage:");
@@ -25,10 +25,10 @@ fn main() {
     let command = args[1].as_str();
 
     let result: Result<(), Box<dyn std::error::Error>> = match command {
-        "to-sbr" => tosbr::convert_to_sbr(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
-        "from-sbr" => fromsbr::convert_from_sbr(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
-        "to-hbmp" => tohbmp::convert_to_hbmp(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
-        "from-hbmp" => fromhbmp::convert_from_hbmp(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
+        "tosbr" => tosbr::convert_to_sbr(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
+        "fromsbr" => fromsbr::convert_from_sbr(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
+        "tohbmp" => tohbmp::convert_to_hbmp(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
+        "fromhbmp" => fromhbmp::convert_from_hbmp(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
         _ => {
             print_usage();
             process::exit(1);

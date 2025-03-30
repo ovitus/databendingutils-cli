@@ -7,11 +7,7 @@ mod tohbmp;
 mod fromhbmp;
 
 fn print_usage() {
-    eprintln!("Usage:");
-    eprintln!("  databendingutils tosbr <input_file> <output_file> <header_file>");
-    eprintln!("  databendingutils fromsbr <input_file> <header_file> <output_file>");
-    eprintln!("  databendingutils tohbmp <input_file> <output_file> <header_file>");
-    eprintln!("  databendingutils fromhbmp <input_file_path> <header_file> <output_file>");
+    eprintln!("Usage: databendingutils <tosbr/fromsbr/tohbmp/fromhbmp> <input_file> <output_file> <header_file>");
 }
 
 fn main() {
@@ -26,9 +22,9 @@ fn main() {
 
     let result: Result<(), Box<dyn std::error::Error>> = match command {
         "tosbr" => tosbr::convert_to_sbr(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
-        "fromsbr" => fromsbr::convert_from_sbr(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
+        "fromsbr" => fromsbr::convert_from_sbr(&args[2], &args[4], &args[3]).map_err(|e| e.into()),
         "tohbmp" => tohbmp::convert_to_hbmp(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
-        "fromhbmp" => fromhbmp::convert_from_hbmp(&args[2], &args[3], &args[4]).map_err(|e| e.into()),
+        "fromhbmp" => fromhbmp::convert_from_hbmp(&args[2], &args[4], &args[3]).map_err(|e| e.into()),
         _ => {
             print_usage();
             process::exit(1);
